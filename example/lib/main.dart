@@ -1,7 +1,8 @@
 import 'dart:io';
+import 'package:doc_scanner/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:cunning_document_scanner/cunning_document_scanner.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,20 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'CamScanner Clone',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.blue.shade700,
+          foregroundColor: Colors.white,
+        ),
+      ),
+      home: HomeScreen(),
+    );
+
+
+    /*return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
@@ -42,24 +57,8 @@ class _MyAppState extends State<MyApp> {
           ],
         )),
       ),
-    );
+    );*/
   }
 
-  void onPressed() async {
-    List<String> pictures;
-    try {
-      pictures = await CunningDocumentScanner.getPictures(
-              iosScannerOptions: IosScannerOptions(
-            imageFormat: IosImageFormat.jpg,
-            jpgCompressionQuality: 0.5,
-          )) ??
-          [];
-      if (!mounted) return;
-      setState(() {
-        _pictures = pictures;
-      });
-    } catch (exception) {
-      // Handle exception here
-    }
-  }
+
 }
